@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function CountryCard({ country }) {
+function CountryCard({ country, isFavourite, onFavouriteToggle }) {
   const navigate = useNavigate();
 
   return (
@@ -15,6 +15,19 @@ function CountryCard({ country }) {
         }
       }}
     >
+      <button
+        type="button"
+        className={`favourite-button ${isFavourite ? "saved" : ""}`}
+        onClick={(event) => {
+          event.stopPropagation();
+          if (onFavouriteToggle) {
+            onFavouriteToggle();
+          }
+        }}
+      >
+        {isFavourite ? "Remove" : "Save"}
+      </button>
+
       <img src={country.flags?.png} alt={`Flag of ${country.name?.common}`} />
 
       <div className="country-card-body">

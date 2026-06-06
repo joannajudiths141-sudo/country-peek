@@ -164,6 +164,7 @@ nav a {
 }
 
 .country-card {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
@@ -213,6 +214,23 @@ nav a {
   background: var(--surface);
   text-decoration: none;
   color: var(--text);
+}
+
+.favourite-button {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.favourite-button.saved {
+  background: #fde68a;
+  border-color: #f59e0b;
 }
 
 .country-detail-card {

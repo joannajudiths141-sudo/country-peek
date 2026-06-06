@@ -1,6 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import CountryCard from "../components/CountryCard";
 import FilterBar from "../components/FilterBar";
+import { useFavourites } from "../context/FavouritesContext";
 
 function Home() {
   const [search, setSearch] = useState("");
@@ -9,6 +10,12 @@ function Home() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const { favourites, addFavourite, removeFavourite } = useFavourites();
+  const favouriteIds = useMemo(
+    () => new Set(favourites.map((country) => country.cca3)),
+    [favourites]
+  );
 
   useEffect(() => {
     let isMounted = true;
@@ -105,7 +112,18 @@ function Home() {
           <p className="status-message">Showing {filteredCountries.length} countries</p>
           <section className="country-grid">
             {filteredCountries.map((country) => (
-              <CountryCard key={country.cca3} country={country} />
+              <CountryCard
+                key={country.cca3}
+                country={country}
+                isFavourite={favouriteIds.has(country.cca3)}
+                onFavouriteToggle={() => {
+                  if (favouriteIds.has(country.cca3)) {
+                    removeFavourite(country.cca3);
+                  } else {
+                    addFavourite(country);
+                  }
+                }}
+              />
             ))}
           </section>
         </>
