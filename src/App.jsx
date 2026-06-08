@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
 import NotFound from "./pages/NotFound";
+import CountryPage from "./pages/CountryPage";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/country/:code" element={<CountryPage />}
+/>      <Route path="/" element={<Home />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
